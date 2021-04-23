@@ -1,6 +1,6 @@
 # Karate-Demo-Project
 
-This is a simple demo project designed to help folks learn to use Karate for both client- & server-side testing, as well as load/perforamnce testing.
+This is a simple demo project designed to help folks learn to use Karate for both client- & server-side testing, as well as load/performance testing.
 
 ## jbang
 

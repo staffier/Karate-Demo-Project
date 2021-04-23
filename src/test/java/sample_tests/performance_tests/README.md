@@ -22,4 +22,8 @@ Additional details can be found here: https://github.com/intuit/karate/tree/mast
 
 ## gatling.conf
 
-You can also define all sorts of additional configurations using the [`gatling.conf`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/gatling.conf) file. 
+You can define all sorts of additional configurations using the [`gatling.conf`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/gatling.conf) file. 
+
+Details on these configuration settings can be found here: https://gatling.io/docs/current/general/configuration/
+
+Only a subset of settings were included in this example.  If you're interested in seeing a more comprehensive file in action, this is the place to do so: https://github.com/gatling/gatling/blob/master/gatling-core/src/main/resources/gatling-defaults.conf. 

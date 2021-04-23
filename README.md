@@ -4,7 +4,7 @@ This is a simple demo project designed to help folks learn to use Karate for bot
 
 ## jbang
 
-Before you get started, I recommend installing [`jbang`](https://www.jbang.dev).  Once installed, I further recommend you install `karate` as a local command-line application (replace `RELEASE` with the Karate version you're working with, e.g. 1.0.1):
+Before you get started, I recommend installing [`jbang`](https://www.jbang.dev).  Once installed, I further recommend you install `karate` as a local command-line application (replace `RELEASE` with the Karate version you're working with, e.g. `1.0.1`):
 
 ```
 jbang app install --name karate com.intuit.karate:karate-core:RELEASE

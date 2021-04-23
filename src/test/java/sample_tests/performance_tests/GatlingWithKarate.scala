@@ -1,4 +1,4 @@
-package sample_tests.functional_tests
+package sample_tests.performance_tests
 
 import com.intuit.karate.gatling.PreDef._
 import io.gatling.core.Predef._

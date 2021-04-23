@@ -14,6 +14,10 @@ If you have multiple Scala files to your project, but only want to run one of th
 mvn clean test-compile gatling:test -Dgatling.simulationClass=examples.tests.GatlingWithKarate
 ```
 
+## Starting & Stopping a Server
+
+A couple shell scripts are included in this folder to start and stop our [mock server](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/mock_server/server.feature).  The [server starter](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/server-starter.sh) assumes you have [jbang](https://www.jbang.dev/) installed.  And the [server stopper](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/server-stopper.sh) doesn't appear to be working at the moment, although it should: https://github.com/intuit/karate/tree/master/karate-netty#stopping. 
+
 ## gatling-akka.conf
 
 If your tests are getting jammed up, you can control your thread pool size using the [`gatling-akka.conf`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/gatling-akka.conf) file. 

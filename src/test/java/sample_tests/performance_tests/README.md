@@ -13,3 +13,13 @@ If you have multiple Scala files to your project, but only want to run one of th
 ```
 mvn clean test-compile gatling:test -Dgatling.simulationClass=examples.tests.GatlingWithKarate
 ```
+
+## gatling-akka.conf
+
+If your tests are getting jammed up, you can control your thread pool size using the [`gatling-akka.conf`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/gatling-akka.conf) file. 
+
+Additional details can be found here: https://github.com/intuit/karate/tree/master/karate-gatling#increasing-thread-pool-size
+
+## gatling.conf
+
+You can also define all sorts of additional configurations using the [`gatling.conf`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/gatling.conf) file. 

@@ -49,7 +49,7 @@ Feature: A simple server to demo some server-side Karate stuff...
   Scenario: methodIs('post')
     * abortWithResponse(404, response404);
 
-  Scenario: pathMatches('happy')
+  Scenario: pathMatches('/happy')
     * abortWithResponse(405, response405);
 
   # Catch all scenario to reply in case all sorts of stuff went wrong

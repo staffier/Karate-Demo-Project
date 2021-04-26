@@ -11,7 +11,7 @@ mvn clean test-compile gatling:test
 If you have multiple Scala files in your project, but only want to run one of them, you can specify which you wish to run like this:
 
 ```
-mvn clean test-compile gatling:test -Dgatling.simulationClass=examples.tests.GatlingWithKarate
+mvn clean test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithKarate
 ```
 
 ## Starting & Stopping a Server

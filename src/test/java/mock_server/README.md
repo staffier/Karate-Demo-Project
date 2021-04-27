@@ -27,7 +27,7 @@ A Karate server can be started & stopped from the command line (assuming you hav
 
 Crafting a response for a given Scenario is simple, and typically a matter of defining `responseHeaders`, a `responseStatus`, and a `response` body, e.g.: 
 
-  ```
+  ```feature
   Scenario: pathMatches('/some/path') && methodIs('post')
     * def responseStatus = 200
     * def responseHeaders = { 'someKey': 'someValue', 'someOtherKey': 'someOtherValue' }
@@ -38,7 +38,7 @@ Crafting a response for a given Scenario is simple, and typically a matter of de
 
 Karate can also intercept HTTP requests and delegate them to a target server based on criteria specified in a Scenario's expression via the `karate.proceed(url)` function, e.g.: 
 
-  ```
+  ```feature
   Scenario: typeContains('xml')
     * karate.proceed('http://some.url.com')
   ```

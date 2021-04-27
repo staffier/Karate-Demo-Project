@@ -15,13 +15,54 @@ mvn clean test-compile gatling:test -Dgatling.simulationClass=sample_tests.perfo
 ```
 ## Building a Scala File
 
+There are a few key ingredients that go into making Karate work with Gatling. 
 
-```scala
-  val protocol = karateProtocol()
+### karateProtocol() & karateFeature()
+First, you'll need to add a `karateProtocol()` along with at least one Scenario (there can by multiple in a simulation) that points to a Karate feature file using `karateFeature()`: 
 
-  val someScenario = scenario("Some Scenario Name")
-    .exec(karateFeature("classpath:some/path/my-karate-tests.feature"))
-```
+  ```scala
+    val protocol = karateProtocol()
+
+    val someScenario = scenario("Some Scenario Name")
+      .exec(karateFeature("classpath:some/path/my-karate-tests.feature"))
+  ```
+This is also where you'll specify the URL patterns involved in your simulation.  For instance, if your path includes a dynamic ID value, and you want to aggregate these results, you'd specify something like this within your karateProtocol(): 
+
+  ```scala
+    val protocol = karateProtocol(
+      "/some/path/{id}" -> Nil
+    )
+  ```
+
+Also, if you only wish to execute a subset of scenarios within a feature file, you can tag these scenarios in your feature file and reference these tags in your Scala file.  For instance, to only execute scenarios tagged with `@performance`, you could do this: 
+
+  ```scala
+    val someScenario = scenario("Some Scenario Name")
+      .exec(karateFeature("classpath:some/path/my-karate-tests.feature", "@performance"))
+  ```
+
+...or you could exclude certain scenarios by adding a tilde, like this: 
+
+  ```scala
+    val someScenario = scenario("Some Scenario Name")
+      .exec(karateFeature("classpath:some/path/my-karate-tests.feature", "~@notForPerformance"))
+  ```
+
+### Simulation Setup & Injection Profile
+
+Next, you'll need to define your workload model, of which there are two to choose from: 
+ * Closed systems, where you control the concurrent number of users
+ * Open systems, where you control the arrival rate of users
+
+Your workload is defined within `setUp()`, with an `inject()` method employed for each scenario you defined earlier. 
+
+Details on these models, and the building blocks of each, can be found here: 
+https://gatling.io/docs/current/general/simulation_setup/
+
+### Assertions
+
+Assertions: 
+https://gatling.io/docs/current/general/assertions/
 
 ## Starting & Stopping a Server
 

@@ -54,15 +54,31 @@ Next, you'll need to define your workload model, of which there are two to choos
  * Closed systems, where you control the concurrent number of users
  * Open systems, where you control the arrival rate of users
 
-Your workload is defined within `setUp()`, with an `inject()` method employed for each scenario you defined earlier. 
+Your workload is defined within `setUp()`, with an `inject()` method employed for each scenario you defined earlier.  For instance, if we were to build an open workload model, ramping from an injection rate of 0 to 50 users per second over our simulation's first 10 seconds, then holding our injection rate at 50 users per second for another 20 seconds, something like this is what we'd end up with: 
 
-Details on these models, and the building blocks of each, can be found here: 
+  ```scala
+    setUp(
+      someScenario.inject(
+        rampUsersPerSec(0) to (50) during (10 seconds),
+        constantUsersPerSec(50) during (20 seconds)
+      ).protocols(protocol)
+    )
+  ```
+
+A couple different models are included in the [`GatlingWithKarate.scala`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/GatlingWithKarate.scala) file, but for a comprehensive overview of Gatling's Open vs. Closed Workload Models, and the building blocks of each, please refer here: 
 https://gatling.io/docs/current/general/simulation_setup/
 
 ### Assertions
 
-Assertions: 
-https://gatling.io/docs/current/general/assertions/
+Finally, if you're using Karate in conjuction with Gatling for performance testing, as we are, any assertions included in your feature file will be enforced.  However, if you wish to add additional assertions on the Gatling side of the house -- for instance, to enforce a global max response time or an acceptable range of requests per second throughout your simulation -- you can do so with Gatling's Assertions API by tacking `.assertions()` onto the end of your `setUp()`, e.g.: 
+
+  ```scala
+    setUp(scn).assertions(
+      global.responseTime.max.lt(50),
+      global.successfulRequests.percent.gt(95)
+    )
+  ```
+Details on the additional assertions Gatling makes available can be found here: https://gatling.io/docs/current/general/assertions/. 
 
 ## Starting & Stopping a Server
 

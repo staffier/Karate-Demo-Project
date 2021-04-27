@@ -13,6 +13,15 @@ If you have multiple Scala files in your project, but only want to run one of th
 ```
 mvn clean test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithKarate
 ```
+## Building a Scala File
+
+
+```scala
+  val protocol = karateProtocol()
+
+  val someScenario = scenario("Some Scenario Name")
+    .exec(karateFeature("classpath:some/path/my-karate-tests.feature"))
+```
 
 ## Starting & Stopping a Server
 

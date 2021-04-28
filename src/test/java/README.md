@@ -1,6 +1,10 @@
-# Client- & Server-Side Karate
+## Client- & Server-Side Karate
 
-For details, drill down into the [`/mock_server`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/mock_server) & [`/sample_tests/functional_tests`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/functional_tests) folders. 
+For details, drill down into the [`/mock_server`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/mock_server) & [`/sample_tests/functional_tests`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/functional_tests) folders.
+
+## Performance Testing with Karate
+
+For details, dive into the [`/sample_tests/performance_tests`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests) folder. 
 
 ## Logging & Configuration
 

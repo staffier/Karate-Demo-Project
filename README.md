@@ -2,6 +2,8 @@
 
 This is a simple demo project designed to help folks learn to use Karate for both client- & server-side testing, as well as load/performance testing.
 
+For details around using Karate on both the client & server side, as well as for performance testing, drill down into the [`/src/test/java`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java) sub-folders. 
+
 ## jbang
 
 Before you get started, I recommend installing [`jbang`](https://www.jbang.dev).  Once installed, I further recommend you install `karate` as a local command-line application (replace `RELEASE` with the Karate version you're working with, e.g. `1.0.1`):

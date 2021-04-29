@@ -62,6 +62,7 @@
                 <configuration>
                     <simulationsFolder>src/test/java/sample_tests/performance_tests</simulationsFolder>
                     <configFolder>src/test/java/sample_tests/performance_testss</configFolder>
+                    <runMultipleSimulations>true</runMultipleSimulations>
                 </configuration>
                 <executions>
                     <execution>

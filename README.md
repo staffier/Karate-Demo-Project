@@ -1,8 +1,6 @@
 # Karate-Demo-Project
 
-This is a simple demo project designed to help folks learn to use Karate for both client- & server-side testing, as well as load/performance testing.
-
-For details around using Karate on both the client & server side, as well as for performance testing, drill down into the [`/src/test/java`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java) sub-folders. 
+This is a simple demo project designed to help folks learn to use Karate for both client- & server-side testing, as well as load/performance testing.  For details around each of these aspects, drill down into the [`/src/test/java`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java) sub-folders. 
 
 ## jbang
 

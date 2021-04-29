@@ -1,8 +1,4 @@
-@ignore
 Feature: A simple server to demo some server-side Karate stuff...
-
-  The @ignore tag up top is to make our runner class (ExamplesTestRunner) ignore this feature file when it tries to
-  execute every feature file within the ../tests folder
 
   This server will validate the request method, path, header and payload for incoming requests and respond accordingly:
    - If the method isn't POST, you'll get a 405 - Method Not Allowed error

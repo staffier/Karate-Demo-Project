@@ -99,5 +99,5 @@ Only a subset of settings were included in this example.  If you're interested i
 ## Gatling without Karate
 
 A [`GatlingWithoutKarate.scala`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/GatlingWithoutKarate.scala) file is included here, as well, for comparison purposes.  [Gatling DSL](https://gatling.io/docs/current/cheat-sheet/) is fairly easy to pick up, and running simulations with Karate involved can result in a much lower request per second rate.  For instance, running the two simulations included here locally resulted in the following: 
- * With Karate:    Duration = ~125s; RPS = ~20
+ * With Karate:    Duration = 125s; RPS = 20
  * Without Karate: Duration = 30s; RPS = ~83

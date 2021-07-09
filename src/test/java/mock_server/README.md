@@ -4,11 +4,7 @@ Server-side feature files work a bit differently than their client-side cousins.
 
   `Scenario: pathMatches('/some/path')`
 
-As requests roll in, each is evaluated against the scenarios defined in the server-side feature file, and a response is provided based on the best match.  The criteria used to determine a match score are: 
-1. Path - e.g. `pathMatches('/some/path')`
-2. Method - e.g. `methodIs('get')`
-3. Query parameters - e.g. `paramExists('someParam')`
-4. Headers - e.g. `headerContains('someKey', 'someValue')`
+On each incoming HTTP request, the Scenario expressions are evaluated in order, starting from the first one within the Feature. If the expression evaluates to `true`, the body of the Scenario is evaluated and the HTTP response is returned.
 
 ## Starting & Stopping a Server
 

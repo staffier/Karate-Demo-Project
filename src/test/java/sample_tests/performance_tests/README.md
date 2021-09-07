@@ -82,7 +82,7 @@ Details on the additional assertions Gatling makes available can be found here: 
 
 ## Starting & Stopping a Server
 
-A couple shell scripts are included in this folder to start and stop our [mock server](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/mock_server/server.feature).  The [server starter](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/server-starter.sh) assumes you have [jbang](https://www.jbang.dev/) installed.  And the [server stopper](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/server-stopper.sh) doesn't appear to be working at the moment, although it should: https://github.com/intuit/karate/tree/master/karate-netty#stopping. 
+A couple shell scripts are included in this folder to start and stop our [mock server](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/mock_server/server.feature).  The [server starter](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/server-starter.sh) assumes you have [jbang](https://www.jbang.dev/) installed.  
 
 ## Gatling Configuration
 

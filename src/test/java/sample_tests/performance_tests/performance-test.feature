@@ -3,7 +3,7 @@ Feature: Some client-side tests to use for performance testing purposes
   Background:
     * url 'http://localhost:8080'
 
-  # Each scenario is tagged se we can call them with individual load models from our performance test file
+  # Each scenario is tagged so we can call them with individual load models from our performance test file
 
   @happy-path
   Scenario: Happy path test

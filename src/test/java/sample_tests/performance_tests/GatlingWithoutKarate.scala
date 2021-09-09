@@ -1,5 +1,6 @@
 package sample_tests.performance_tests
 
+import com.intuit.karate.gatling.PreDef._
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
@@ -7,6 +8,11 @@ import scala.concurrent.duration._
 import scala.language.postfixOps
 
 class GatlingWithoutKarate extends Simulation {
+
+  val protocol = karateProtocol()
+
+  val startServer = scenario("Start the server")
+    .exec(karateFeature("classpath:sample_tests/functional_tests/start-server.feature"))
 
   val httpProtocol = http
     .baseUrl("http://localhost:8080")
@@ -43,7 +49,18 @@ class GatlingWithoutKarate extends Simulation {
         .post("/happy")
         .header("Auth", "valid-auth-header")
         .header("Optional-Header", "this value shouldn't matter")
-        .body(StringBody("""{ "id": "888", "username": "HandsomeTony", "optional": { "optionalA": "who cares", "optionalB": "this doesn't matter, either" } }""")).asJson
+        .body(StringBody(
+          """
+          |{
+          |  "id": "888",
+          |  "username": "HandsomeTony",
+          |  "optional": {
+          |    "optionalA": "who cares",
+          |    "optionalB": "this doesn't matter, either"
+          |  }
+          |}
+          """
+          .stripMargin)).asJson
         .check(
           status.is(200),
           jsonPath("$.message").is("Everything looks good!"),
@@ -52,18 +69,21 @@ class GatlingWithoutKarate extends Simulation {
     )
 
   setUp(
-    happyPath.inject(
-      rampUsersPerSec(0) to (50) during (10 seconds),
-      constantUsersPerSec(50) during (20 seconds)
-    ).protocols(httpProtocol),
-    sadPath.inject(
-      rampUsersPerSec(0) to (25) during (10 seconds),
-      constantUsersPerSec(25) during (20 seconds)
-    ).protocols(httpProtocol),
-    optionalFields.inject(
-      rampUsersPerSec(0) to (25) during (10 seconds),
-      constantUsersPerSec(25) during (20 seconds)
-    ).protocols(httpProtocol)
+    startServer.inject(atOnceUsers(1)).protocols(protocol)
+      .andThen(
+        happyPath.inject(
+          rampUsersPerSec(0) to (50) during (20 seconds),
+          constantUsersPerSec(50) during (30 seconds)
+        ).protocols(httpProtocol),
+        sadPath.inject(
+          rampUsersPerSec(0) to (50) during (20 seconds),
+          constantUsersPerSec(50) during (30 seconds)
+        ).protocols(httpProtocol),
+        optionalFields.inject(
+          rampUsersPerSec(0) to (50) during (20 seconds),
+          constantUsersPerSec(50) during (30 seconds)
+        ).protocols(httpProtocol)
+      )
   )
 
 }

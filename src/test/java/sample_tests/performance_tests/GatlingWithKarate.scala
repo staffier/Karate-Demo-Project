@@ -10,6 +10,9 @@ class GatlingWithKarate extends Simulation {
 
   val protocol = karateProtocol()
 
+  val startServer = scenario("Start the server")
+    .exec(karateFeature("classpath:sample_tests/functional_tests/start-server.feature"))
+
   val happyPath = scenario("Happy Path Test")
     .exec(karateFeature("classpath:sample_tests/performance_tests/performance-test.feature@happy-path"))
 
@@ -22,30 +25,36 @@ class GatlingWithKarate extends Simulation {
   val allScenarios = scenario("All Scenarios")
     .exec(karateFeature("classpath:sample_tests/performance_tests/performance-test.feature"))
 
-  setUp(
-    happyPath.inject(
-      rampUsersPerSec(0) to (50) during (10 seconds),
-      constantUsersPerSec(50) during (20 seconds)
-    ).protocols(protocol),
-    sadPath.inject(
-      rampUsersPerSec(0) to (25) during (10 seconds),
-      constantUsersPerSec(25) during (20 seconds)
-    ).protocols(protocol),
-    optionalFields.inject(
-      rampUsersPerSec(0) to (25) during (10 seconds),
-      constantUsersPerSec(25) during (20 seconds)
-    ).protocols(protocol)
-  )
-
 //  setUp(
-//    allScenarios.inject(
-//      rampUsersPerSec(0) to (33) during (10 seconds),
-//      incrementUsersPerSec(11)
-//        .times(5)
-//        .eachLevelLasting(10 seconds)
-//        .separatedByRampsLasting(5 seconds)
-//        .startingFrom(33)
-//    )
+//    startServer.inject(atOnceUsers(1)).protocols(protocol)
+//      .andThen(
+//        happyPath.inject(
+//          rampUsersPerSec(0) to (50) during (20 seconds),
+//          constantUsersPerSec(50) during (30 seconds)
+//        ).protocols(protocol),
+//        sadPath.inject(
+//          rampUsersPerSec(0) to (50) during (20 seconds),
+//          constantUsersPerSec(50) during (30 seconds)
+//        ).protocols(protocol),
+//        optionalFields.inject(
+//          rampUsersPerSec(0) to (50) during (20 seconds),
+//          constantUsersPerSec(50) during (30 seconds)
+//        ).protocols(protocol)
+//      )
 //  )
+
+  setUp(
+    startServer.inject(atOnceUsers(1)).protocols(protocol)
+      .andThen(
+        allScenarios.inject(
+          rampUsersPerSec(0) to (33) during (10 seconds),
+          incrementUsersPerSec(11)
+            .times(5)
+            .eachLevelLasting(10 seconds)
+            .separatedByRampsLasting(5 seconds)
+            .startingFrom(33)
+        )
+      )
+  )
 
 }

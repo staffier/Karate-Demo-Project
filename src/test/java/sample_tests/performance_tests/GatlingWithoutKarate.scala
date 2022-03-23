@@ -9,8 +9,6 @@ import scala.language.postfixOps
 
 class GatlingWithoutKarate extends Simulation {
 
-  val protocol = karateProtocol()
-
   val startServer = scenario("Start the server")
     .exec(karateFeature("classpath:sample_tests/functional_tests/start-server.feature"))
 

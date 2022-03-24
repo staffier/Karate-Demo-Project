@@ -1,6 +1,5 @@
 package sample_tests.performance_tests
 
-import com.intuit.karate.gatling.PreDef._
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
@@ -8,11 +7,6 @@ import scala.concurrent.duration._
 import scala.language.postfixOps
 
 class GatlingWithoutKarate extends Simulation {
-
-  val protocol = karateProtocol()
-
-  val startServer = scenario("Start the server")
-    .exec(karateFeature("classpath:sample_tests/functional_tests/start-server.feature"))
 
   val httpProtocol = http
     .baseUrl("http://localhost:8080")
@@ -69,21 +63,18 @@ class GatlingWithoutKarate extends Simulation {
     )
 
   setUp(
-    startServer.inject(atOnceUsers(1)).protocols(protocol)
-      .andThen(
-        happyPath.inject(
-          rampUsersPerSec(0) to (50) during (20 seconds),
-          constantUsersPerSec(50) during (30 seconds)
-        ).protocols(httpProtocol),
-        sadPath.inject(
-          rampUsersPerSec(0) to (50) during (20 seconds),
-          constantUsersPerSec(50) during (30 seconds)
-        ).protocols(httpProtocol),
-        optionalFields.inject(
-          rampUsersPerSec(0) to (50) during (20 seconds),
-          constantUsersPerSec(50) during (30 seconds)
-        ).protocols(httpProtocol)
-      )
+    happyPath.inject(
+      rampUsersPerSec(0) to (50) during (10 seconds),
+      constantUsersPerSec(50) during (10 seconds)
+    ).protocols(httpProtocol),
+    sadPath.inject(
+      rampUsersPerSec(0) to (50) during (10 seconds),
+      constantUsersPerSec(50) during (10 seconds)
+    ).protocols(httpProtocol),
+    optionalFields.inject(
+      rampUsersPerSec(0) to (50) during (10 seconds),
+      constantUsersPerSec(50) during (10 seconds)
+    ).protocols(httpProtocol)
   )
 
 }

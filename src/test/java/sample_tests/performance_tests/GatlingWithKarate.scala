@@ -1,9 +1,11 @@
+// mvn test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithKarate
+
 package sample_tests.performance_tests
 
 import com.intuit.karate.gatling.PreDef._
 import io.gatling.core.Predef._
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.DurationInt
 import scala.language.postfixOps
 
 class GatlingWithKarate extends Simulation {
@@ -22,39 +24,22 @@ class GatlingWithKarate extends Simulation {
   val optionalFields = scenario("Optional Fields")
     .exec(karateFeature("classpath:sample_tests/performance_tests/performance-test.feature@optional-fields"))
 
-  val allScenarios = scenario("All Scenarios")
-    .exec(karateFeature("classpath:sample_tests/performance_tests/performance-test.feature"))
-
-//  setUp(
-//    startServer.inject(atOnceUsers(1)).protocols(protocol)
-//      .andThen(
-//        happyPath.inject(
-//          rampUsersPerSec(0) to (50) during (20 seconds),
-//          constantUsersPerSec(50) during (30 seconds)
-//        ).protocols(protocol),
-//        sadPath.inject(
-//          rampUsersPerSec(0) to (50) during (20 seconds),
-//          constantUsersPerSec(50) during (30 seconds)
-//        ).protocols(protocol),
-//        optionalFields.inject(
-//          rampUsersPerSec(0) to (50) during (20 seconds),
-//          constantUsersPerSec(50) during (30 seconds)
-//        ).protocols(protocol)
-//      )
-//  )
-
   setUp(
-    startServer.inject(atOnceUsers(1)).protocols(protocol)
+    startServer.inject(atOnceUsers(1))
       .andThen(
-        allScenarios.inject(
-          rampUsersPerSec(0) to (33) during (10 seconds),
-          incrementUsersPerSec(11)
-            .times(5)
-            .eachLevelLasting(10 seconds)
-            .separatedByRampsLasting(5 seconds)
-            .startingFrom(33)
+        happyPath.inject(
+          rampUsersPerSec(0) to (7) during (5 seconds),
+          constantUsersPerSec(7) during (10 seconds)
+        ),
+        sadPath.inject(
+          rampUsersPerSec(0) to (2) during (5 seconds),
+          constantUsersPerSec(2) during (10 seconds)
+        ),
+        optionalFields.inject(
+          rampUsersPerSec(0) to (1) during (5 seconds),
+          constantUsersPerSec(1) during (10 seconds)
         )
       )
-  )
+  ).protocols(protocol)
 
 }

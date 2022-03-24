@@ -9,6 +9,8 @@ import scala.language.postfixOps
 
 class GatlingWithoutKarate extends Simulation {
 
+  val protocol = karateProtocol()
+
   val startServer = scenario("Start the server")
     .exec(karateFeature("classpath:sample_tests/functional_tests/start-server.feature"))
 
@@ -36,7 +38,7 @@ class GatlingWithoutKarate extends Simulation {
         .body(StringBody("""{ "id": "321", "username": "yetAnotherValidUser" }""")).asJson
         .check(
           status.is(404),
-          jsonPath("$.message").is("You're not authorized to access this link"),
+          jsonPath("$.message").is("You're trying to reach an invalid link"),
           jsonPath("$.timestamp").ofType[String]
         ).requestTimeout(30 seconds)
     )

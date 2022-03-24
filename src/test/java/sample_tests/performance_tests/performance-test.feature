@@ -3,7 +3,17 @@ Feature: Some client-side tests to use for performance testing purposes
   Background:
     * url 'http://localhost:8080'
 
-  # Each scenario is tagged so we can call them with individual load models from our performance test file
+  # Use these next two scenarios to run a Gatling simulation with and without Karate involved
+
+  Scenario: Run a Gatling simulation with Karate
+    * karate.start({ mock: 'classpath:mock_servers/server.feature', port: 8080 })
+    * karate.exec('mvn test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithKarate')
+
+  Scenario: Run a Gatling simulation without Karate
+    * karate.start({ mock: 'classpath:mock_servers/server.feature', port: 8080 })
+    * karate.exec('mvn test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithoutKarate')
+
+  # Each scenario below is tagged so we can call them with individual load models from our Gatling performance test file
 
   @happy-path
   Scenario: Happy path test
@@ -21,7 +31,7 @@ Feature: Some client-side tests to use for performance testing purposes
     * request { "id": "321", "username": "yetAnotherValidUser" }
     * method post
     * status 404
-    * match response == { "message": "You're not authorized to access this link", "timestamp": "#string" }
+    * match response == { "message": "You're trying to reach an invalid link", "timestamp": "#string" }
 
   @optional-fields
   Scenario: Test involving optional key/value pairs in the payload

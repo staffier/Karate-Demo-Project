@@ -12,9 +12,6 @@ class GatlingWithKarate extends Simulation {
 
   val protocol = karateProtocol()
 
-  val startServer = scenario("Start the server")
-    .exec(karateFeature("classpath:sample_tests/functional_tests/start-server.feature"))
-
   val happyPath = scenario("Happy Path Test")
     .exec(karateFeature("classpath:sample_tests/performance_tests/performance-test.feature@happy-path"))
 
@@ -25,21 +22,18 @@ class GatlingWithKarate extends Simulation {
     .exec(karateFeature("classpath:sample_tests/performance_tests/performance-test.feature@optional-fields"))
 
   setUp(
-    startServer.inject(atOnceUsers(1))
-      .andThen(
-        happyPath.inject(
-          rampUsersPerSec(0) to (7) during (5 seconds),
-          constantUsersPerSec(7) during (10 seconds)
-        ),
-        sadPath.inject(
-          rampUsersPerSec(0) to (2) during (5 seconds),
-          constantUsersPerSec(2) during (10 seconds)
-        ),
-        optionalFields.inject(
-          rampUsersPerSec(0) to (1) during (5 seconds),
-          constantUsersPerSec(1) during (10 seconds)
-        )
-      )
+    happyPath.inject(
+      rampUsersPerSec(0) to (7) during (10 seconds),
+      constantUsersPerSec(7) during (10 seconds)
+    ),
+    sadPath.inject(
+      rampUsersPerSec(0) to (2) during (10 seconds),
+      constantUsersPerSec(2) during (10 seconds)
+    ),
+    optionalFields.inject(
+      rampUsersPerSec(0) to (1) during (10 seconds),
+      constantUsersPerSec(1) during (10 seconds)
+    )
   ).protocols(protocol)
 
 }

@@ -11,7 +11,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <maven.compiler.version>3.6.0</maven.compiler.version>
-        <karate.version>1.0.1</karate.version>
+        <karate.version>1.2.0.RC5</karate.version>
     </properties>    
 
     <dependencies>
@@ -26,6 +26,23 @@
             <artifactId>karate-gatling</artifactId>
             <version>${karate.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.3.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.3-1100-jdbc41</version>
         </dependency>
     </dependencies>
 
@@ -61,7 +78,7 @@
                 <version>3.0.5</version>
                 <configuration>
                     <simulationsFolder>src/test/java/sample_tests/performance_tests</simulationsFolder>
-                    <configFolder>src/test/java/sample_tests/performance_testss</configFolder>
+                    <configFolder>src/test/java/sample_tests/performance_tests</configFolder>
                     <runMultipleSimulations>true</runMultipleSimulations>
                 </configuration>
                 <executions>

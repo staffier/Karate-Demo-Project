@@ -12,6 +12,8 @@ Feature: A few client-side tests to showcase some Karate commands...
     # feature only once, so that we don't get an error when executing Scenario 2 and beyond, telling us our
     # port (8080) is in use.
     * callonce read('start-server.feature')
+    * configure logPrettyRequest = true
+    * configure logPrettyResponse = true
 
   Scenario: Test our mock server using a valid request
     # Send a few requests to this location, starting with our happy path:
@@ -20,6 +22,7 @@ Feature: A few client-side tests to showcase some Karate commands...
     * request { "id": "12345", "username": "validUser" }
     * method post
     * status 200
+    * match header Response-ID == '#uuid'
     * match response == { "message": "Everything looks good!", "timestamp": "#string" }
 
   Scenario: Test our mock server using an invalid header, path & method
@@ -29,6 +32,7 @@ Feature: A few client-side tests to showcase some Karate commands...
     * request { "id": "777", "username": "anotherValidUser" }
     * method post
     * status 403
+    * match header Response-ID == '#uuid'
     * match response == { "message": "Access denied", "timestamp": "#string" }
 
     # Invalid path:
@@ -37,13 +41,15 @@ Feature: A few client-side tests to showcase some Karate commands...
     * request { "id": "321", "username": "yetAnotherValidUser" }
     * method post
     * status 404
-    * match response == { "message": "You're not authorized to access this link", "timestamp": "#string" }
+    * match header Response-ID == '#uuid'
+    * match response == { "message": "You're trying to reach an invalid link", "timestamp": "#string" }
 
     # Invalid request method:
     * header Auth = "valid-auth-header"
     * path '/happy'
     * method get
     * status 405
+    * match header Response-ID == '#uuid'
     * match response == { "message": "Your request method is not allowed", "timestamp": "#string" }
 
   Scenario: Test our mock server with invalid payloads
@@ -53,6 +59,7 @@ Feature: A few client-side tests to showcase some Karate commands...
     * request { "id": "", "username": "someName" }
     * method post
     * status 400
+    * match header Response-ID == '#uuid'
     * match response contains { "message": "Your request is invalid", "missing": "id" }
 
     # ID key is missing:
@@ -61,6 +68,7 @@ Feature: A few client-side tests to showcase some Karate commands...
     * request { "username": "someName" }
     * method post
     * status 400
+    * match header Response-ID == '#uuid'
     * match response contains { "message": "Your request is invalid", "missing": "id" }
 
     # Username value is empty:
@@ -69,6 +77,7 @@ Feature: A few client-side tests to showcase some Karate commands...
     * request { "id": "888", "username": "" }
     * method post
     * status 400
+    * match header Response-ID == '#uuid'
     * match response contains { "message": "Your request is invalid", "missing": "username" }
 
     # Username key is missing:
@@ -77,6 +86,7 @@ Feature: A few client-side tests to showcase some Karate commands...
     * request { "id": "888" }
     * method post
     * status 400
+    * match header Response-ID == '#uuid'
     * match response contains { "message": "Your request is invalid", "missing": "username" }
 
   Scenario: Test our mock server with optional headers & key/value pairs in the payload
@@ -86,6 +96,7 @@ Feature: A few client-side tests to showcase some Karate commands...
     * request { "id": "888", "username": "HandsomeTony", "optional": { "optionalA": "who cares", "optionalB": "this doesn't matter, either" } }
     * method post
     * status 200
+    * match header Response-ID == '#uuid'
     * match response.message == "Everything looks good!"
     * match response contains { "timestamp": "#string" }
 
@@ -95,5 +106,5 @@ Feature: A few client-side tests to showcase some Karate commands...
     * request { "message": "____" }
     * method delete
     * status 666
+    * match header Response-ID == '#uuid'
     * match response contains { "errorDetails": "#array" }
-    * print response.errorDetails

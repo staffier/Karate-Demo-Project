@@ -2,7 +2,7 @@
 
 Karate integrates with Gatling to allow you to re-use feature files for performance testing purposes.  In short, you'll define your load model in a Gatling Scala file -- [`GatlingWithKarate.scala`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/GatlingWithKarate.scala) in this example -- and let Karate take care of building requests and validating the responses coming back (see [`performance-test.feature`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/performance-test.feature) for details). 
 
-You can invoke the Gatling plugin and run this performance test by running the following from your command line inside the Karate-Demo-Project parent folder:
+You can invoke the Gatling plugin and run a performance test by running the following from your command line inside the Karate-Demo-Project parent folder:
 
 ```
 mvn clean test-compile gatling:test
@@ -13,6 +13,9 @@ If you have multiple Scala files in your project, but only want to run one of th
 ```
 mvn clean test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithKarate
 ```
+
+To simplify things a bit, scenarios have been included in the [`performance-test.feature`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/performance-test.feature) file which will start up the appropriate server (where requests will be sent) and run a Gatling simulation. 
+
 ## Building a Scala File
 
 There are a few key ingredients that go into making Karate work with Gatling. 

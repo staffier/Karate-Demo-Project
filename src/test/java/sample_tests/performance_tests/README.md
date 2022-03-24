@@ -65,7 +65,7 @@ Your workload is defined within `setUp()`, with an `inject()` method employed fo
     )
   ```
 
-A couple different models are included in the [`GatlingWithKarate.scala`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/GatlingWithKarate.scala) file, but for a comprehensive overview of Gatling's Open vs. Closed Workload Models, and the building blocks of each, please refer here: 
+For a comprehensive overview of Gatling's Open vs. Closed Workload Models, and the building blocks of each, please refer here: 
 https://gatling.io/docs/current/general/simulation_setup/
 
 ### Assertions

@@ -14,8 +14,16 @@ If you have multiple Scala files in your project, but only want to run one of th
 mvn clean test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithKarate
 ```
 
-To simplify things a bit, scenarios have been included in the [`performance-test.feature`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/performance-test.feature) file which will start up the appropriate server (where requests will be sent) and run a Gatling simulation. 
+To simplify things a bit, scenarios have been included in the [`performance-test.feature`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/performance-test.feature) file which will start up the appropriate server (where requests will be sent) and run a Gatling simulation: 
 
+  ```Scenario: Run a Gatling simulation with Karate
+    * karate.start({ mock: 'classpath:mock_servers/server.feature', port: 8080 })
+    * karate.exec('mvn test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithKarate')
+     
+  Scenario: Run a Gatling simulation without Karate
+    * karate.start({ mock: 'classpath:mock_servers/server.feature', port: 8080 })
+    * karate.exec('mvn test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithoutKarate')
+  ```
 ## Building a Scala File
 
 There are a few key ingredients that go into making Karate work with Gatling. 

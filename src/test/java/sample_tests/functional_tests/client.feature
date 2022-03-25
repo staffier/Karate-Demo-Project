@@ -7,11 +7,15 @@ Feature: A few client-side tests to showcase some Karate commands...
   - Request body contains an "id" and "username"
 
   Background: Define our base URL and start our mock server (it will shut down automatically upon test completion)
-    * url 'http://localhost:8080'
-    # Since Background commands are automatically run before each Scenario, we need to call our server starting
-    # feature only once, so that we don't get an error when executing Scenario 2 and beyond, telling us our
-    # port (8080) is in use.
-    * callonce read('start-server.feature')
+    # Start a server on a free port - the 'start' function starts a server and returns its port:
+    * def start = () => karate.start('classpath:mock_servers/server.feature').port
+    # 'callonce' is used to execute the 'start' function because we don't want to start a new server for each scenario:
+    * def port = callonce start
+
+    # Define our base URL and port:
+    * url 'http://localhost:' + port
+
+    # Specify some configurations - in this case, have Karate "pretty print" request & response bodies:
     * configure logPrettyRequest = true
     * configure logPrettyResponse = true
 

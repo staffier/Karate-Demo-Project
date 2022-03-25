@@ -1,16 +1,19 @@
 Feature: Some client-side tests to use for performance testing purposes
 
   Background:
-    * url 'http://localhost:8080'
+    # Start a server on a free port - the 'start' function starts a server and returns its port:
+    * def start = () => karate.start('classpath:mock_servers/server.feature').port
+    # 'callonce' is used to execute the 'start' function because we don't want to start a new server for each scenario:
+    * def port = callonce start
+    # Define our base URL and port:
+    * url 'http://localhost:' + port
 
   # Use these next two scenarios to run a Gatling simulation with and without Karate involved
 
   Scenario: Run a Gatling simulation with Karate
-    * karate.start({ mock: 'classpath:mock_servers/server.feature', port: 8080 })
     * karate.exec('mvn test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithKarate')
 
   Scenario: Run a Gatling simulation without Karate
-    * karate.start({ mock: 'classpath:mock_servers/server.feature', port: 8080 })
     * karate.exec('mvn test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithoutKarate')
 
   # Each scenario below is tagged so we can call them with individual load models from our Gatling performance test file

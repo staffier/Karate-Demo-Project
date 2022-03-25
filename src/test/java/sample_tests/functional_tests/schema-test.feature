@@ -22,10 +22,11 @@ Feature: A few tests to showcase dynamic request generation & schema validation
     * configure logPrettyResponse = true
 
     # Start our server:
-    * callonce read('start-schema_server.feature')
+    * def start = () => karate.start('classpath:mock_servers/schema_server.feature').port
+    * def port = callonce start
 
     # Define our host/port:
-    * url 'http://localhost:8080'
+    * url 'http://localhost:' + port
 
   Scenario: Generate a random request that conforms to our schema
     * request

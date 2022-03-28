@@ -2,6 +2,10 @@
 
 For details, dive into the [`/mock_servers`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/mock_servers) & [`/sample_tests/functional_tests`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/functional_tests) folders.
 
+## Kafka Application Testing with Karate
+
+For details, dive into the [`/kafka`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/kafka) folder.
+
 ## Performance Testing with Karate
 
 For details, dive into the [`/sample_tests/performance_tests`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests) folder.

@@ -234,8 +234,6 @@ CONTAINER ID        IMAGE                    NAMES
 ce9b01556d15        wurstmeister/zookeeper   karate-kafka_zookeeper_1
 33685067cb82        wurstmeister/kafka       karate-kafka_kafka_1
 *** sleeping for 10 seconds (give time for containers to spin up)
-*** the following topic were created ....
-test-topic
 ```
 
 To smoke test this, we will setup a consumer that will echo whatever the producer writes. In

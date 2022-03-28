@@ -236,11 +236,6 @@ ce9b01556d15        wurstmeister/zookeeper   karate-kafka_zookeeper_1
 *** sleeping for 10 seconds (give time for containers to spin up)
 ```
 
-To smoke test this, we will setup a consumer that will echo whatever the producer writes. In
-one terminal start off a consumer by running `./consumer.sh`. In another terminal, start off
-a producer by running `./producer.sh`.  Type something into the producer. If all goes well, 
-you should see the consumer echo it back.
-
 From the command-line, run `./teardown.sh` to tear down the cluster. This stops zookeeper
 and all the kafka brokers, and also deletes the containers. This means all the data written
 to the kafka cluster will be lost. During testing, this is good because it

@@ -1,6 +1,8 @@
 # Karate-Demo-Project
 
-This is a simple demo project designed to help folks learn to use Karate for both client- & server-side testing, as well as load/performance testing.  For details around each of these topics, drill down into the [`/src/test/java`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java) sub-folders. 
+This is a simple demo project designed to help folks learn to use Karate for both client- & server-side testing, as well as load/performance testing.
+
+Please note: The Kafka [consumer & producer](https://github.com/staffier/Karate-Demo-Project/blob/main/src/main/kafka)) included in this project were sourced from Soumendra Daas's Karate-Kafka project: https://github.com/Sdaas/karate-kafka.  The Kafka test scenarios were based on tests included in Soumendra Daas's project, as well.
 
 ## jbang
 

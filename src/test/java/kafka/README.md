@@ -48,7 +48,7 @@ Feature: Kafka Producer and Consumer Demo
 ## Quick Demo
 
 Start up a single-node Kafka cluster locally with a topic called `test-topic`. Running
-`KafkaRunner` will invoke `src/test/java/kafka/kafka-demo.feature` which will attempt to
+`KafkaRunner` will invoke [`src/test/java/kafka/kafka-demo.feature`](https://github.com/staffier/Karate-Demo-Project/blob/main/src/test/java/kafka/kafka-demo.feature) which will attempt to
 write a few messages to this topic and read it back. Finally, shut down the Kafka cluster.
 
 ```

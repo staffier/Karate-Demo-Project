@@ -1,7 +1,6 @@
 ## Introduction
 
-Please note: 
-This demo was sourced from Soumendra Daas's Karate-Kafka project: https://github.com/Sdaas/karate-kafka
+**Please note: This demo was sourced from Soumendra Daas's Karate-Kafka project: https://github.com/Sdaas/karate-kafka**
 
 This project provides a library to test Kafka applications using KarateDSL. It provides a `KafkaProducer` and
 a `KafkaConsumer` that can be called from a Karate feature. An example:

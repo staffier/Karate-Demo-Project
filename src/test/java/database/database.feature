@@ -17,7 +17,7 @@ Feature: Database querying & updates with Karate
     * def db = new DbUtils(config)
 
   Scenario: Create a table
-    * def createTable = db.editRows("CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255))")
+    * db.editRows("CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255))")
     * def tables = db.readRows("SELECT * FROM pg_catalog.pg_tables")
     * print tables
     * match tables contains deep { "tablename": "persons", "tableowner": "newuser" }
@@ -65,19 +65,19 @@ Feature: Database querying & updates with Karate
     * match query contains [ "#object", { "personid": "#present", "lastname": "#string", "firstname": "#notnull" } ]
 
   Scenario: Update the table
-    * def update = db.editRows("UPDATE Persons SET LastName = 'LaLonde', FirstName = 'Larry' WHERE PersonID = 3")
+    * db.editRows("UPDATE Persons SET LastName = 'LaLonde', FirstName = 'Larry' WHERE PersonID = 3")
     * def query = db.readRows("SELECT * from Persons")
     * print query
     * match query contains { "personid": 3, "lastname": "LaLonde", "firstname": "Larry" }
 
   Scenario: Delete all records in the table
-    * def delete = db.editRows("DELETE FROM Persons")
+    * db.editRows("DELETE FROM Persons")
     * def query = db.readRows("SELECT * from Persons")
     * print query
     * match query == []
 
   Scenario: Drop the table
-    * def dropTable = db.editRows("DROP TABLE Persons")
+    * db.editRows("DROP TABLE Persons")
     * def tables = db.readRows("SELECT * FROM pg_catalog.pg_tables")
     * match tables !contains { "tablename": "persons", "tableowner": "newuser" }
     * match tables[*].tablename !contains "persons"

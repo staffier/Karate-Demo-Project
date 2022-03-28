@@ -1,3 +1,3 @@
 #!/bin/bash
 
-brew services restart postgresql
+brew services start postgresql

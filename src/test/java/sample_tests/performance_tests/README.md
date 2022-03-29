@@ -15,13 +15,11 @@ mvn clean test-compile gatling:test -Dgatling.simulationClass=sample_tests.perfo
 ```
 
 To simplify things a bit, scenarios have been included in the [`performance-test.feature`](https://github.com/staffier/Karate-Demo-Project/tree/main/src/test/java/sample_tests/performance_tests/performance-test.feature) file which will start up the appropriate server (where requests will be sent) and run a Gatling simulation: 
-  ```gherkin
+  ```
   Scenario: Run a Gatling simulation with Karate
-    * karate.start({ mock: 'classpath:mock_servers/server.feature', port: 8080 })
     * karate.exec('mvn test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithKarate')
      
   Scenario: Run a Gatling simulation without Karate
-    * karate.start({ mock: 'classpath:mock_servers/server.feature', port: 8080 })
     * karate.exec('mvn test-compile gatling:test -Dgatling.simulationClass=sample_tests.performance_tests.GatlingWithoutKarate')
   ```
 ## Building a Scala File

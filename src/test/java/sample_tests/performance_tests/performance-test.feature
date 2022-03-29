@@ -1,10 +1,10 @@
 Feature: Some client-side tests to use for performance testing purposes
 
   Background:
-    # Start a server on a free port - the 'start' function starts a server and returns its port:
+    # Start a server on a free port:
     * def start = () => karate.start('classpath:mock_servers/server.feature').port
-    # 'callonce' is used to execute the 'start' function because we don't want to start a new server for each scenario:
     * def port = callonce start
+
     # Define our base URL and port:
     * url 'http://localhost:' + port
 

@@ -21,7 +21,7 @@ Feature: A few tests to showcase dynamic request generation & schema validation
     * configure logPrettyRequest = true
     * configure logPrettyResponse = true
 
-    # Start our server:
+    # Start our server on a free port using 'callonce' (since we don't want to start a new server for each scenario):
     * def start = () => karate.start('classpath:mock_servers/schema_server.feature').port
     * def port = callonce start
 
